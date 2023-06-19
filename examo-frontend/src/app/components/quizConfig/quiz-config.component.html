@@ -1,0 +1,35 @@
+<div class="container-fluid">
+
+    <h5 style="margin-top:.3em;">what topics u want</h5>
+
+    <!-- Topics -->
+    <div class="form-check" *ngFor="let topic of topicsList; let i = index">
+        <input mdbRadio class="form-check-input" type="checkbox" 
+        name="flexCheck" id="flexCheckDefault{{i}}"
+        value={{topicsList[i]}} (change)="onCheckChange($event, i)"/>
+        <label class="form-check-label" for="flexCheckDefault{{i}}">{{topicsList[i]}}</label>
+    </div>
+
+   
+    <!--Number of Questions-->
+    <h5 style="margin-top:.3em;">how many quessions u want</h5>
+
+    <div *ngFor="let option of numberOfQuestions; let i = index" class="form-check form-check-inline">
+        <input mdbRadio class="form-check-input" type="radio" 
+        name="flexRadio" id="flexRadioDefault{{i}}"
+        value="{{numberOfQuestions[i]}}" (change)="onRadioChange($event)"/>
+        <label class="form-check-label" for="flexRadioDefault{{i}}">{{numberOfQuestions[i]}}</label>
+    </div>
+
+
+    <!--Buttons-->
+    <div class="d-inline"> 
+        <div style="margin-top: 1em">
+            <button class="btn btn-outline-primary" (click)="startQuiz()">Wahoo</button>
+        </div>
+        <!-- <div style="margin-top: 1em">
+            <button class="btn btn-outline-primary">Random Quiz</button>
+        </div> -->
+    </div>
+
+</div>

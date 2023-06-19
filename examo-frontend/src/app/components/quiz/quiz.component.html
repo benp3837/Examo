@@ -1,0 +1,62 @@
+<div class="container-fluid">
+
+     <div class="modal-body border border-dark rounded col-sm-6 d-flex justify-content-center flex-column bg-white bg-gradient" style="margin-left:27%; margin-top:2em; padding:.7em">
+
+        <!--one question shown at a time, toggled by the pagination-->
+        <div class="question-and-answers">
+
+            <p>{{counter+1}})</p>
+
+            <div class="question-holder" style="padding-left:15%">
+                <h3 class="border-bottom" style="margin-bottom:.5em">{{questions[counter].question}}</h3>
+
+                <img class="border rounded" *ngIf="questions[counter].image" src="" alt="Here's where I'd put a picture... IF I HAD ONE" style="padding:.5em">
+
+                <div class="form-check" *ngFor="let answer of questions[counter].answers; let i = index;"> 
+                    <input mdbRadio class="form-check-input" type="radio" 
+                    name="flexRadio{{counter}}" id="flexRadioDefault{{i}}" 
+                    value="{{answer.correct}}" (change)="onRadioChange($event)"/>
+                    <label class="form-check-label" for="flexRadioDefault{{i}}">{{answer.content}}</label>
+                </div> 
+            </div>
+        </div>
+
+        <!--Back and Next Buttons-->
+        <div style="margin-top:1em">
+ 
+            <button class="btn btn-sm btn-outline-dark" (click)="back()">
+                <i-bs class="d-inline" name="arrow-left-short" width="25" height="20"></i-bs>
+                <p class="d-inline" style="font-size: small;" margin-right:2em>back</p>
+            </button>
+
+            <button class="btn btn-sm btn-primary" (click)="checkAnswer()" style="margin-left:30%">Check Answer</button>
+        
+            <button class="btn btn-sm btn-outline-dark" style="float:right" (click)="next()">
+                <i-bs class="d-inline" name="arrow-right-short" width="25" height="20"></i-bs>
+                <p class="d-inline" style="font-size: small;">next</p>
+            </button>
+          
+        </div>
+        <!--End Back and Next Buttons-->
+
+     </div>
+     <!--End Modal Body-->
+
+     <div class="modal-footer"> 
+    </div>
+    <!--End Modal Footer-->
+
+    
+    <!--End Modal-->
+
+    <!--Correct/Incorrect & Explanation-->
+    <div [hidden]="hideAnswer">
+        <h4 *ngIf="isCorrect" style="color:green">Correct!</h4>
+        <h4 *ngIf="!isCorrect" style="color:red">Incorrect</h4>
+
+        <h6 class="border-top col-sm-3">{{questions[counter].explanation}}</h6>
+    </div>
+
+    <!--TODO: Sidebar so you can jump to questions-->
+
+</div>

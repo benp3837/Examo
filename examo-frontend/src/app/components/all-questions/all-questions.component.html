@@ -1,0 +1,79 @@
+<div class="container-fluid">
+
+    <!--This should be a dropdown, with a border above it and the questions under-->
+    <div class="mb-2 col-lg-2 column border-bottom" style="float:left">
+        <h3>Filters:</h3>
+        <div class="col-lg-1">
+      
+        </div>
+    </div>
+
+    <div class="mb-2 col-lg-4 row" style="float:right">
+        <input type="text" class="border rounded-left border-1 border-dark col-lg-10" placeholder="Search for Keywords...">
+        <div class="col-lg-1">
+            <button class="btn btn-sm btn-primary">
+                <i-bs class="d-inline" name="search" width="20" height="10"></i-bs>
+            </button>
+        </div>
+    </div>
+
+    <h3 style="margin-left:28%">Questions</h3>
+    <div class="mt-1 flex-column" style="margin-left:28%; display:block" *ngFor="let question of questions; let i = index">
+        
+        <button class="btn btn-sm btn-outline-dark col-lg-6 " style="display:block"
+         (click)="onQuestionClick(i)">
+            <p style="float:left">{{i+1}})</p>
+            <p style="float:left; margin-left:.3em">{{question.question}}</p>
+        </button>
+
+        <!--TODO: get only the appropriate question shown (the one the user clicked on)-->
+        <!--Does it have to be eventemitter? I feel like no-->
+        <div [hidden]="hideQuestion" *ngIf="i === counter" class="col-sm-6 d-flex justify-content-center flex-column bg-white bg-gradient" style="margin-left:10%;">
+
+            <!--one question shown at a time, toggled by the pagination-->
+            <div [hidden]="hideQuestion" class="question-and-answers">
+    
+                <button class="btn btn-sm" style="float:right; margin-right:18%; display:inline"
+                (click)="closeAll()">x</button>
+
+                <div class="question-holder" style="margin-right:30%">
+
+                    <h3 class="border-bottom" style="margin-bottom:.5em">{{questions[counter].question}}</h3>
+    
+                    <img class="border rounded" *ngIf="questions[counter].image" src="" alt="Here's where I'd put a picture... IF I HAD ONE" style="padding:.5em">
+    
+                    <div class="form-check" *ngFor="let answer of questions[counter].answers; let i = index;"> 
+                        <input mdbRadio class="form-check-input" type="radio" 
+                        name="flexRadio{{counter}}" id="flexRadioDefault{{i}}" 
+                        value="{{answer.correct}}" (change)="onRadioChange($event)"/>
+                        <label class="form-check-label" for="flexRadioDefault{{i}}">{{answer.content}}</label>
+                    </div> 
+                </div>
+
+                <div style="margin-top:1em; margin-left:20%">
+                    <button class="btn btn-sm btn-primary" (click)="checkAnswer()">Check Answer</button>
+                </div>
+
+            </div>
+    
+            <!--Back and Next Buttons-->
+            
+            <!--End Back and Next Buttons-->
+    
+            <div [hidden]="hideAnswer" style="float:left; margin-right:40%">
+                <h4 *ngIf="isCorrect" style="color:green">Correct!</h4>
+                <h4 *ngIf="!isCorrect" style="color:red">Incorrect</h4>
+    
+                <h6 class="border-top">{{questions[counter].explanation}}</h6>
+            </div>
+         </div>
+         <!--End Modal Body-->
+
+        <!--Correct/Incorrect & Explanation-->
+
+
+    </div>
+
+    <button (click)="getAllQuestionsTest()">hi</button>
+
+</div>
